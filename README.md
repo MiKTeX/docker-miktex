@@ -26,7 +26,7 @@ a Docker volume.
 
 ### Example
 
-First, create a Docker valume named `miktex`:
+First, create a Docker volume named `miktex`:
 
     docker volume create --name miktex
 
