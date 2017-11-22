@@ -20,7 +20,7 @@ The host directory containing the input files must be mounted to the
 container path `/miktex/work`.
 
 The container image contains a bare MiKTeX setup and MiKTeX is
-configured to install missing files the container directory
+configured to install missing files in the container directory
 `/miktex/.miktex`.  It is recommended that you mount this directory to
 a Docker volume.
 
@@ -33,7 +33,8 @@ First, create a Docker volume named `miktex`:
 This volume should be used to mount the the container directory
 `/miktex/.miktex` in subsequent runs.
 
-Provided that your maininput file is located in the current working directory, you can run `pdflatex` as follows:
+Provided that your maininput file is located in the current working
+directory, you can run `pdflatex` as follows:
 
     docker run -ti \
       -v miktex:/miktex/.miktex \
