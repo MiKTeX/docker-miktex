@@ -6,6 +6,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D6BC243565
 RUN echo "deb http://miktex.org/download/ubuntu xenial universe" | tee /etc/apt/sources.list.d/miktex.list
 RUN apt-get update
 RUN apt-get install apt-transport-https -y
+RUN apt-get -y install software-properties-common \
+    && add-apt-repository ppa:jonathonf/texlive \
+    && apt-get update \
+    && apt-get install -y biber=2.11-0york0~16.04
 RUN apt-get install miktex -y
 
 RUN apt-get install perl -y
