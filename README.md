@@ -33,7 +33,7 @@ First, create a Docker volume named `miktex`:
 This volume should be used to mount the the container directory
 `/miktex/.miktex` in subsequent runs.
 
-Provided that your maininput file is located in the current working
+Provided that your main input file is located in the current working
 directory, you can run `pdflatex` as follows:
 
     docker run -ti \
