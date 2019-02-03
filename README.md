@@ -24,6 +24,9 @@ configured to install missing files in the container directory
 `/miktex/.miktex`.  It is recommended that you mount this directory to
 a Docker volume.
 
+You should specify a user by setting the container environment
+variables `MIKTEX_GID` and `MIKTEX_UID`.
+
 ### Example
 
 First, create a Docker volume named `miktex`:
@@ -39,5 +42,7 @@ directory, you can run `pdflatex` as follows:
     docker run -ti \
       -v miktex:/miktex/.miktex \
       -v `pwd`:/miktex/work \
+      -e MIKTEX_GID=`id -g` \
+      -e MIKTEX_UID=`id -u` \
       miktex/miktex \
       pdflatex main.tex
