@@ -24,9 +24,9 @@ configured to install missing files in the container directory
 `/miktex/.miktex`.  It is recommended that you mount this directory to
 a Docker volume.
 
-All commands are executed as user `miktex`. By setting the container
+All commands are executed as container user `miktex`. By setting the container
 environment variables `MIKTEX_GID` and `MIKTEX_UID` you can assign a
-gid/uid to the MiKTeX user.
+group ID and a user ID.
 
 ### Example
 

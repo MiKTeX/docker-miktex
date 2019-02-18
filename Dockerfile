@@ -25,7 +25,8 @@ RUN    miktexsetup finish \
     && mpm --admin --update-db \
     && mpm --admin \
            --install amsfonts \
-           --install biber-linux-x86_64
+           --install biber-linux-x86_64 \
+    && initexmf --admin --update-fndb
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
