@@ -35,10 +35,10 @@ a dedicated Docker volume.
 
 By default, all commands inside the container are executed as `root`.
 
-You have the option have run all commands as a dedicated host user by
+It is possible to execute as a dedicated host user by
 setting the container environment variables `MIKTEX_GID` and `MIKTEX_UID`.
 
-To map the current user, you would pass options `-e MIKTEX_GID=$(id
+To execute as the current user, you would pass options `-e MIKTEX_GID=$(id
 -g)` and `-e MIKTEX_UID=$(id -u)` to the Docker `run` command.
 
 ### Example
@@ -47,7 +47,7 @@ First, create a Docker volume named `miktex`:
 
     docker volume create --name miktex
 
-This volume should be used to mount the the container directory
+This volume will be used to mount the the container directory
 `/miktex/.miktex` in subsequent runs.
 
 Provided that your main input file is located in the current working
