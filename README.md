@@ -14,19 +14,32 @@ or build it yourself:
 
 ## Using the image
 
-### Prerequisites
+### Volumes
+
+#### Input files
 
 The host directory containing the input files must be mounted to the
 container path `/miktex/work`.
 
-The container image contains a bare MiKTeX setup and MiKTeX is
-configured to install missing files in the container directory
-`/miktex/.miktex`.  It is recommended that you mount this directory to
-a Docker volume.
+To mount the current host working directory, you would pass option `-v
+$(pwd):/miktex/work` to the Docker `run` command.
 
-All commands are executed as container user `miktex`. By setting the container
-environment variables `MIKTEX_GID` and `MIKTEX_UID` you can assign a
-group ID and a user ID.
+#### Package files
+
+The container image contains a bare MiKTeX setup and MiKTeX is
+configured to install missing package files in the container directory
+`/miktex/.miktex`.  It is recommended that you mount this directory to
+a dedicated Docker volume.
+
+### Running as `root` or not
+
+By default, all commands inside the container are executed as `root`.
+
+You have the option have run all commands as a dedicated host user by
+setting the container environment variables `MIKTEX_GID` and `MIKTEX_UID`.
+
+To map the current user, you would pass options `-e MIKTEX_GID=$(id
+-g)` and `-e MIKTEX_UID=$(id -u)` to the Docker `run` command.
 
 ### Example
 
@@ -40,10 +53,10 @@ This volume should be used to mount the the container directory
 Provided that your main input file is located in the current working
 directory, you can run `pdflatex` as follows:
 
-    docker run -ti \
+    docker run --rm -ti \
       -v miktex:/miktex/.miktex \
-      -v `pwd`:/miktex/work \
-      -e MIKTEX_GID=`id -g` \
-      -e MIKTEX_UID=`id -u` \
+      -v $(pwd):/miktex/work \
+      -e MIKTEX_GID=$(id -g) \
+      -e MIKTEX_UID=$(id -u) \
       miktex/miktex \
       pdflatex main.tex

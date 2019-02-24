@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 
-LABEL Description="Dockerized MiKTeX, Ubuntu 18.04" Vendor="Christian Schenk" Version="2.9.6970"
+LABEL Description="Dockerized MiKTeX, Ubuntu 18.04" Vendor="Christian Schenk" Version="2.9.6990"
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -30,6 +30,10 @@ RUN    miktexsetup finish \
 
 COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
+
+ENV MIKTEX_USERCONFIG=/miktex/.miktex/texmfs/config
+ENV MIKTEX_USERDATA=/miktex/.miktex/texmfs/data
+ENV MIKTEX_USERINSTALL=/miktex/.miktex/texmfs/install
 
 WORKDIR /miktex/work
 
