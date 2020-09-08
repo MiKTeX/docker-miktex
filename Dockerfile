@@ -4,6 +4,7 @@ LABEL Description="Dockerized MiKTeX, Ubuntu 20.04" Vendor="Christian Schenk" Ve
 
 RUN    apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+           tzdata
            apt-transport-https \
            ca-certificates \
            dirmngr \
