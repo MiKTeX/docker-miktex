@@ -60,3 +60,31 @@ directory, you can run `pdflatex` as follows:
       -e MIKTEX_UID=$(id -u) \
       miktex/miktex \
       pdflatex main.tex
+
+## Using the image on CI/CD
+
+When using the image on a CI/CD server it is recommended to run `mpm --update-db` before `pdflatex`.
+
+### GitLab Example
+
+Note that caching of the packages is currently not possible, because GitLab does not allow to cache files outside of the project dir (see #22).
+
+```
+image: miktex/miktex
+
+variables:
+  MIKTEX_GID: 1111
+  MIKTEX_UID: 1111
+
+build:
+  script:
+    - mpm --update-db
+    - pdflatex main
+# if something goes wrong on CI this might be very helpful:
+#  after_script:
+#    - cat /miktex/.miktex/texmfs/data/miktex/log/*.log
+#    - cat /miktex/.miktex/texmfs/data/miktex/log/*.out
+  artifacts:
+    paths:
+      - "*.pdf"
+```
