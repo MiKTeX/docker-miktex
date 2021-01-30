@@ -2,6 +2,8 @@ FROM ubuntu:focal
 
 LABEL Description="Dockerized MiKTeX, Ubuntu 20.04" Vendor="Christian Schenk" Version="20.7"
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
            apt-transport-https \
@@ -16,7 +18,7 @@ RUN    apt-get update \
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D6BC243565B2087BC3F897C9277A7293F59E4889
 RUN echo "deb http://miktex.org/download/ubuntu focal universe" | tee /etc/apt/sources.list.d/miktex.list
 
-RUN    apt-get update \
+RUN    apt-get update -y \
     && apt-get install -y --no-install-recommends \
            miktex
 
