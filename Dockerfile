@@ -1,4 +1,5 @@
-FROM ubuntu:focal
+ARG VARIANT=focal
+FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 
 LABEL Description="Dockerized MiKTeX, Ubuntu 20.04" Vendor="Christian Schenk" Version="21.7"
 
@@ -58,4 +59,4 @@ ENV MIKTEX_USERINSTALL=/miktex/.miktex/texmfs/install
 
 WORKDIR /miktex/work
 
-CMD ["bash"]
+CMD ["sleep", "infinity"]
