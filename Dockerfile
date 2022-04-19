@@ -1,7 +1,5 @@
 FROM ubuntu:focal
 
-LABEL Description="Dockerized MiKTeX, Ubuntu 20.04" Vendor="Christian Schenk" Version="21.7"
-
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN    apt-get update \
