@@ -13,5 +13,5 @@ jobs:
     steps:
       - run: docker login ghcr.io -u ${{ github.actor }} -p ${{ github.token }}
       - uses: actions/checkout@v3
-      - run: docker build --platform linux/amd64 --tag ghcr.io/hfhbd/miktex:${{ github.sha }} .
+      - run: docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag ghcr.io/hfhbd/miktex:${{ github.sha }} .
       - run: docker push ghcr.io/hfhbd/miktex:${{ github.sha }}
