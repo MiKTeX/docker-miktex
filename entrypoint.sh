@@ -1,12 +1,10 @@
 #!/bin/bash
 
-if [ -z "${MIKTEX_UID}" ]; then
-    exec "$@"
-else
-    MIKTEX_GID=${MIKTEX_GID:-${MIKTEX_UID}}
-    groupadd -g "${MIKTEX_GID}" -o miktex
-    useradd --shell /bin/bash -u "${MIKTEX_UID}" -g "${MIKTEX_GID}" -o -c "" -Md /miktex miktex
-    mkdir -p /miktex/.miktex
-    chown -R miktex:miktex /miktex/.miktex
-    exec gosu miktex "$@"
+MIKTEX_UID=${MIKTEX_UID:-1000}
+MIKTEX_GID=${MIKTEX_GID:-${MIKTEX_UID}}
+if [ "$(id -u miktex)" != 1000 ]; then
+    usermod -u ${MIKTEX_UID} miktex >/dev/null
+    groupmod -g ${MIKTEX_GID} miktex
+    chown -R miktex:miktex /var/lib/miktex
 fi
+exec gosu miktex "$@"
