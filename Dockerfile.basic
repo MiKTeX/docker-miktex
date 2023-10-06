@@ -1,4 +1,4 @@
-FROM miktex/miktex:latest
+FROM miktex/miktex:essential
 
 LABEL Description="Dockerized MiKTeX, Ubuntu 22.04"
 LABEL Vendor="Christian Schenk"
